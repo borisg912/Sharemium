@@ -1,0 +1,39 @@
+﻿<Application
+    x:Class="Sharemium.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Sharemium">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush x:Key="ApplicationPageBackgroundThemeBrush"
+                                  BackgroundSource="HostBackdrop"
+                                  TintColor="#fefefe"
+                                  TintOpacity="0.5"
+                                  TintLuminosityOpacity="0.45"
+                                  FallbackColor="#fefefe"/>
+                    <AcrylicBrush x:Key="FlipViewItemBackgroundThemeBrush"
+                                  BackgroundSource="Backdrop"
+                                  TintColor="#eaeaea"
+                                  TintOpacity="0.75"
+                                  FallbackColor="#eaeaea"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <AcrylicBrush x:Key="ApplicationPageBackgroundThemeBrush"
+                                  BackgroundSource="HostBackdrop"
+                                  TintColor="#131313"
+                                  TintOpacity="0.5"
+                                  TintLuminosityOpacity="0.45"
+                                  FallbackColor="#131313"/>
+                    <AcrylicBrush x:Key="FlipViewItemBackgroundThemeBrush"
+                                  BackgroundSource="Backdrop"
+                                  TintColor="#2a2a2a"
+                                  TintOpacity="0.75"
+                                  FallbackColor="#2a2a2a"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
