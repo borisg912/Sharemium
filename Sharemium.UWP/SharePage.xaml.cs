@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,10 +22,11 @@ namespace Sharemium
 {
     public sealed partial class SharePage : Page
     {
-        private string ShareTypeContent;
         private string ShareTitle;
         private string ShareDescr;
-        private string ShareLink;
+        private string ShareContent;
+        private string ShareHostApp;
+
         public SharePage()
         {
             this.InitializeComponent();
@@ -34,34 +37,12 @@ namespace Sharemium
             ApplicationView.GetForCurrentView().TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(175, 254, 254, 254);
             ApplicationView.GetForCurrentView().TitleBar.InactiveBackgroundColor = Color.FromArgb(0, 0, 0, 0);
             ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = Color.FromArgb(0, 0, 0, 0);
-            ApplicationView.PreferredLaunchViewSize = new Size(500, 480);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
             DataTransferManager dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += DataTransferManager_DataRequested;
             dataTransferManager.TargetApplicationChosen += DataTransferManager_TargetApplicationChosen;
         }
-        public void HandleURIParameters(string fullPath, Dictionary<string, string> queryParams)
-        {
-            ShareTitle = "Website";
-            ShareDescr = "Link sent using Sharemium";
-            ShareLink = fullPath;
-            foreach (var param in queryParams)
-            {
-                switch (param.Key)
-                {
-                    case "typeof":
-                        ShareTypeContent = param.Value;
-                        break;
-                    case "title":
-                        ShareTitle = param.Value;
-                        break;
-                    case "descr":
-                        ShareDescr = param.Value;
-                        break;
-                }
-            }
-        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -71,16 +52,54 @@ namespace Sharemium
                 DataTransferManager.ShowShareUI();
             }
         }
+
+        public void HandleURIParameters(string fullPath, Dictionary<string, string> queryParams)
+        {
+            
+            ShareTitle = "Website";
+            ShareDescr = "Link sent using Sharemium";
+            foreach (var param in queryParams)
+            {
+                switch (param.Key)
+                {
+                    case "title":
+                        ShareTitle = param.Value;
+                        break;
+                    case "descr":
+                        ShareDescr = param.Value;
+                        break;
+                    case "app":
+                        ShareHostApp = param.Value;
+                        break;
+                }
+            }
+            if (!fullPath.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
+                !fullPath.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                // Add "https://" if missing
+                ShareContent = "https://" + fullPath;
+            }
+            else
+            {
+                ShareContent = fullPath;
+            }
+            
+        }
+
         public void DataTransferManager_DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             DataRequest request = args.Request;
             request.Data.Properties.Title = ShareTitle;
             request.Data.Properties.Description = ShareDescr;
-            request.Data.SetWebLink(new Uri(ShareLink));
+            request.Data.SetWebLink(new Uri(ShareContent));
         }
-        private void DataTransferManager_TargetApplicationChosen(DataTransferManager sender, TargetApplicationChosenEventArgs args)
+
+        private async void DataTransferManager_TargetApplicationChosen(DataTransferManager sender, TargetApplicationChosenEventArgs args)
         {
-            return;
+            SharingTextLoad.Visibility = Visibility.Collapsed;
+            SharingTextDone.Visibility = Visibility.Visible;
+            SharingGraphicLoad.Visibility = Visibility.Collapsed;
+            SharingGraphicDone.Visibility = Visibility.Visible;
         }
     }
 }

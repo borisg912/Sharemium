@@ -9,57 +9,16 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <FlipView x:Name="MainFlipView"
-                  Background="Transparent"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  MinWidth="250"
-                  Width="500"
-                  Height="500">
-            <Grid x:Name="FlipViewGridFirst" Background="{ThemeResource FlipViewItemBackgroundThemeBrush}" CornerRadius="12" Margin="5,0,5,0">
-                <Image Source="Assets/Square150x150Logo.scale-200.png"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                    <TextBlock x:Name="GridTitleFirst" FontSize="38" FontWeight="SemiBold" TextAlignment="Center">Sharemium</TextBlock>
-                    <TextBlock x:Name="GridDescriptionFirst" FontSize="15" TextAlignment="Center" TextWrapping="WrapWholeWords">Your Windows sharing assistant</TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid x:Name="FlipViewGrid1" Background="{ThemeResource FlipViewItemBackgroundThemeBrush}" CornerRadius="12" Margin="5,0,5,0">
-                <Image Source="Assets/Square150x150Logo.scale-200.png"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                    <TextBlock x:Name="GridTitle1" FontSize="28" FontWeight="SemiBold" TextAlignment="Center">Bridge Desktop and Universal apps</TextBlock>
-                    <TextBlock x:Name="GridDescription1" FontSize="14" TextAlignment="Center" TextWrapping="WrapWholeWords">Share links and images from Win32 to UWP apps like Whatsapp</TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid x:Name="FlipViewGrid2" Background="{ThemeResource FlipViewItemBackgroundThemeBrush}" CornerRadius="12" Margin="5,0,5,0">
-                <Image Source="Assets/Square150x150Logo.scale-200.png"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                    <TextBlock x:Name="GridTitle2" FontSize="28" FontWeight="SemiBold" TextAlignment="Center">Minimal and lightweight</TextBlock>
-                    <TextBlock x:Name="GridDescription2" FontSize="14" TextAlignment="Center" TextWrapping="WrapWholeWords">The app doesn't run in the background and doesn't take up much space</TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid x:Name="FlipViewGrid3" Background="{ThemeResource FlipViewItemBackgroundThemeBrush}" CornerRadius="12" Margin="5,0,5,0">
-                <Image Source="Assets/Square150x150Logo.scale-200.png"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                    <TextBlock x:Name="GridTitle3" FontSize="28" FontWeight="SemiBold" TextAlignment="Center">100% native</TextBlock>
-                    <TextBlock x:Name="GridDescription3" FontSize="14" TextAlignment="Center" TextWrapping="WrapWholeWords">Sharemium is built and available for all Windows-based devices</TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid x:Name="FlipViewGrid4" Background="{ThemeResource FlipViewItemBackgroundThemeBrush}" CornerRadius="12" Margin="5,0,5,0">
-                <Image Source="Assets/Square150x150Logo.scale-200.png"/>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10">
-                    <TextBlock x:Name="GridTitle4" FontSize="28" FontWeight="SemiBold" TextAlignment="Center">Intuitive Protocols</TextBlock>
-                    <TextBlock x:Name="GridDescription4" FontSize="14" TextAlignment="Center" TextWrapping="WrapWholeWords">You can share anything with the 'sharemium:' protocol</TextBlock>
-                </StackPanel>
-            </Grid>
-            <Grid x:Name="FlipViewGridFinal" Background="{ThemeResource FlipViewItemBackgroundThemeBrush}" CornerRadius="12" Margin="5,0,5,0">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10">
-                    <TextBlock x:Name="GridTitleFinal" FontSize="32" FontWeight="SemiBold" TextAlignment="Center">Let's get started!</TextBlock>
-                    <Button x:Name="DemoButtonFinal" FontSize="16" Margin="0,5,0,5" HorizontalAlignment="Center" Click="DemoButtonFinal_Click">Demo Sharemium</Button>
-                    <TextBlock x:Name="DemoButtonClickedOutput" FontSize="12" Margin="0,10,0,10" HorizontalAlignment="Center" Text="" Visibility="Collapsed" IsTextSelectionEnabled="True"/>
-                </StackPanel>
-            </Grid>
-        </FlipView>
-        <Button VerticalAlignment="Bottom" Click="DebugTemp">DebugTemp</Button>
-        <TextBlock x:Name="DebugParamBox" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,0">
+            <TextBlock x:Uid="MainPageWarningMsg" TextWrapping="WrapWholeWords" TextAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <HyperlinkButton x:Uid="MainPageStoreLink" Margin="5,0" NavigateUri="ms-windows-store://pdp?productid=9wzdncrfj3pv" Visibility="Collapsed"/>
+                <HyperlinkButton x:Uid="MainPageGitHubLink" Margin="5,0" NavigateUri="https://borisg912.github.io/Sharemium"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
+            <Image Source="Assets/RawLogo.png" Width="40" Margin="5,0"/>
+            <TextBlock FontSize="22" VerticalAlignment="Center">Sharemium</TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

@@ -9,7 +9,7 @@
   <Identity
     Name="UnifyDev.SharingAssistant"
     Publisher="CN=UnifyDev"
-    Version="0.8.2.0" />
+    Version="0.9.4.0" />
 
   <mp:PhoneIdentity PhoneProductId="7a5a5142-388e-4ba7-8ad2-ab080acfd928" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -36,7 +36,8 @@
             Description="Windows sharing assistant"
 			Square150x150Logo="Assets\150x150Logo.png"
             Square44x44Logo="Assets\AppLogo.png"
-			BackgroundColor="transparent">
+			BackgroundColor="transparent"
+			AppListEntry="none">
 			<uap:SplashScreen Image="Assets\SplashLogo.png" BackgroundColor="transparent"/>
 			<uap:DefaultTile
 				Square71x71Logo="Assets\71x71Logo.png">

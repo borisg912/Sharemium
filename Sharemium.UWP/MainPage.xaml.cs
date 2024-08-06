@@ -16,13 +16,8 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace Sharemium
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -30,33 +25,17 @@ namespace Sharemium
             this.InitializeComponent();
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Color.FromArgb(0, 0, 0, 0);
+            ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Color.FromArgb(255, 0, 0, 0);
             ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Color.FromArgb(0, 0, 0, 0);
+            ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Color.FromArgb(255, 0, 0, 0);
             ApplicationView.GetForCurrentView().TitleBar.ButtonHoverBackgroundColor = Color.FromArgb(75, 254, 254, 254);
+            ApplicationView.GetForCurrentView().TitleBar.ButtonHoverForegroundColor = Color.FromArgb(255, 0, 0, 0);
             ApplicationView.GetForCurrentView().TitleBar.ButtonPressedBackgroundColor = Color.FromArgb(175, 254, 254, 254);
+            ApplicationView.GetForCurrentView().TitleBar.ButtonPressedForegroundColor = Color.FromArgb(255, 0, 0, 0);
             ApplicationView.GetForCurrentView().TitleBar.InactiveBackgroundColor = Color.FromArgb(0, 0, 0, 0);
+            ApplicationView.GetForCurrentView().TitleBar.InactiveForegroundColor = Color.FromArgb(255, 0, 0, 0);
             ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = Color.FromArgb(0, 0, 0, 0);
-            ApplicationView.PreferredLaunchViewSize = new Size(600, 600);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-        }
-
-        private async void DemoButtonFinal_Click(object sender, RoutedEventArgs e)
-        {
-            var DemoPageURL = new Uri(@"https://borisg912.github.io/Sharemium/DemoLaunch/");
-            var DemoPageLoad = await Windows.System.Launcher.LaunchUriAsync(DemoPageURL);
-            if (DemoPageLoad)
-            {
-                DemoButtonClickedOutput.Visibility = Visibility.Visible;
-                DemoButtonClickedOutput.Text = "Demo page open";
-            }
-            else
-            {
-                DemoButtonClickedOutput.Visibility = Visibility.Visible;
-                DemoButtonClickedOutput.Text = "Couldn't open demo page, @" + DemoPageURL;
-            }
-        }
-        private void DebugTemp(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(SharePage));
+            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveForegroundColor = Color.FromArgb(255, 0, 0, 0);
         }
     }
 }

@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Sharemium",
+    "version": "1.0",
+    "description": "A browser extension for the Windows sharing assistant",
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "dialog.html",
+      "default_icon": {
+        "16": "Assets/Logo16x16.png",
+        "24": "Assets/Logo24x24.png",
+        "32": "Assets/Logo32x32.png",
+        "48": "Assets/Logo48x48.png",
+        "64": "Assets/Logo64x64.png",
+        "128": "Assets/Logo128x128.png"
+      }
+    }
+  }

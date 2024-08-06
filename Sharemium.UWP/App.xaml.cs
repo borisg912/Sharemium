@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,7 +21,8 @@ namespace Sharemium
 {
     sealed partial class App : Application
     {
-        private readonly List<string> expectedParams = new List<string> { "typeof", "title", "descr", "app" };
+        private readonly List<string> expectedParams = new List<string> { "title", "descr", "app" };
+
         public App()
         {
             this.InitializeComponent();
@@ -35,13 +37,18 @@ namespace Sharemium
                 if (protocolArgs != null)
                 {
                     HandleProtocolActivation(protocolArgs.Uri);
-                }
+                } else { LaunchMainPage(); }
             }
             base.OnActivated(args);
         }
 
         private void HandleProtocolActivation(Uri uri)
         {
+            if (uri == null || (string.IsNullOrEmpty(uri.AbsolutePath.Trim('/')) && string.IsNullOrEmpty(uri.Query)))
+            {
+                LaunchMainPage();
+                return;
+            }
             var fullPath = uri.AbsolutePath.Trim('/');
             var queryParams = new Dictionary<string, string>();
             var queryString = uri.Query;
@@ -75,15 +82,23 @@ namespace Sharemium
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            LaunchMainPage();
+        }
+
+        private void LaunchMainPage()
+        {
+            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US";
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
             {
                 rootFrame = new Frame();
+                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 Window.Current.Content = rootFrame;
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                Window.Current.Activate();
+                
             }
+            rootFrame.Navigate(typeof(MainPage));
+            Window.Current.Activate();
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)

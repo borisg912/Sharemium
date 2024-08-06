@@ -156,6 +156,8 @@
     <Content Include="Assets\AppLogo.targetsize-24.png" />
     <Content Include="Assets\AppLogo.targetsize-32.png" />
     <Content Include="Assets\AppLogo.targetsize-48.png" />
+    <Content Include="Assets\RawLogo.png" />
+    <Content Include="Assets\ShareDone.png" />
     <Content Include="Assets\SplashLogo.scale-100.png" />
     <Content Include="Assets\SplashLogo.scale-125.png" />
     <Content Include="Assets\SplashLogo.scale-150.png" />
@@ -185,11 +187,16 @@
       <Version>6.2.14</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\Resources.bg-bg.resw" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
