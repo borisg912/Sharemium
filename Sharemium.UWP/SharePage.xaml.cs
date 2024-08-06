@@ -94,7 +94,7 @@ namespace Sharemium
             request.Data.SetWebLink(new Uri(ShareContent));
         }
 
-        private async void DataTransferManager_TargetApplicationChosen(DataTransferManager sender, TargetApplicationChosenEventArgs args)
+        private void DataTransferManager_TargetApplicationChosen(DataTransferManager sender, TargetApplicationChosenEventArgs args)
         {
             SharingTextLoad.Visibility = Visibility.Collapsed;
             SharingTextDone.Visibility = Visibility.Visible;
