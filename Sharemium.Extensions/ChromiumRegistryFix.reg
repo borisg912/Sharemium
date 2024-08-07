@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave\ExtensionInstallAllowlist]
+"1"="mojpnbchbjndpnlihncobpdcldahdoea"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallAllowlist]
+"1"="mojpnbchbjndpnlihncobpdcldahdoea"
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Vivaldi\ExtensionInstallAllowlist]
+"1"="mojpnbchbjndpnlihncobpdcldahdoea"
