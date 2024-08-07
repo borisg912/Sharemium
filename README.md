@@ -17,7 +17,10 @@
  A disadvantage of this is the fact that some pages that rely on in-URL parameters, like YouTube (<code>youtube.com/watch?v=dQw4w9WgXcQ</code>) where the 'v' key handles the video tag, will be discarded. I plan to find a solution in the future.
 
 ## NEW! Published the first (buggy) beta version of the Chromium extension v9.7 Beta 2.
-Tested on Brave and Opera. Before installing on Chrome, Brave or Vivaldi import the registries from /Sharemium.Extensions/FixChromiumRegistry.reg (adds the extension as trusted), because it's not in the Chrome Web Store. Opera doesn't require this, and I plan to launch it on the Opera add-on store.
+Tested on Brave and Opera.
+
+Note: Before installing on Chrome, Brave or Vivaldi import the registries from /Sharemium.Extensions/FixChromiumRegistry.reg (adds the extension as trusted), because it's not in the Chrome Web Store.
+Opera doesn't require this, and I plan to launch it on the Opera add-on store.
 
 ### Here's 3 cents:
 - My first actual UWP C# app :)
