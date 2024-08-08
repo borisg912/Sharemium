@@ -1,38 +1,1 @@
- ![image](https://raw.githubusercontent.com/borisg912/Sharemium/main/Assets/RawLogo200x200.png)
-# Sharemium
- A Windows UWP sharing assistant
- 
- The perfect assistant for sharing content easily from your browser to your favourite UWP apps, working with earlier versions of Windows, including 10240 RTM
- ## How it works?
- The app works by getting a website link and protocol parameters from the 'sharemium:' URI.
- The website link is automatically formated to include the http/https extension, and currently supports the parameters <code>title</code> and <code>descr</code>, supposed to be taken advantage by the extension to give the shaing dialog infobox the webpage's meta tags.
- In the future, I plan to use the <code>favicon</code> to include link to the webpage's favicon for the Windows 11 modern Share dialog.
- 
- The URI structure follows this simple scheme:
- 
- <code>sharemium:example.com?title=Example domain&descr=An example domain @.com</code>
- 
- sharemium:*//a/website/path*?title=*Page title*&descr=*Page description*
-
- A disadvantage of this is the fact that some pages that rely on in-URL parameters, like YouTube (<code>youtube.com/watch?v=dQw4w9WgXcQ</code>) where the 'v' key handles the video tag, will be discarded. I plan to find a solution in the future.
-
-## NEW! Published the first (buggy) beta version of the Chromium extension v9.7 Beta 2.
-Tested on Brave and Opera.
-
-Note: Before installing on Chrome, Brave or Vivaldi import the registries from /Sharemium.Extensions/FixChromiumRegistry.reg (adds the extension as trusted), because it's not in the Chrome Web Store.
-Opera doesn't require this, and I plan to launch it on the Opera add-on store.
-
-### Here's 3 cents:
-- My first actual UWP C# app :)
-- Waiting until v10.0 to upload to Store
-- Working out bugs on the Chromium extension + Gecko add-on (Firefox, Floorp, Mullvad) later on
-
-### My 2 free cents:
-- Anyone can contribute or give notes/suggestions/feedback
-- The app is as-is, no warranty, no guarantee, no nuthin'
-
-#### Credits and thanks
-- Empyreal96 for [Appx Re-Sign] for signing the app
-- License: GNU GPLv3
-
-[Appx Re-Sign]: <https://github.com/Empyreal96/Appx_Re-Sign>
+ ![image](https://raw.githubusercontent.com/borisg912/Sharemium/main/Assets/RawLogo200x200.png)# Sharemium#### A Windows UWP sharing assistant The perfect extension-program duo for sharing content from your browser to your favorite UWP apps with ease### ❔ How it works?The app works by getting the website link and protocol parameters from the 'sharemium:' URI, called by the extension.The link is automatically formatted to include the http/https extension, and then carried over to the Windows Sharing dialog. The URI structure follows this simple scheme: <code>sharemium:__website.com/path__?title=__Site title__&descr=__A simple website__</code>### 💻 How to install1. __Download the app__     1. Go to the [Releases](https://github.com/borisg912/Sharemium/releases) page.     2. Find and download the latest .appxbundle and the .cer files for the app.     3. Find and download the latest .crx for the Chromium extension.     4. Only for Chrome, Vivaldi and Brave: Go [here](https://https://github.com/borisg912/Sharemium/tree/main/Sharemium.Extensions) and download the _ChromiumRegistryFix.reg_ Registry policy entry to enable the extension.2. __Install the app and its certificate__     1. Open your file manager of choice, right-click the .cer certificate and click __Install certificate__.          * If you're installing the app on a Windows 10 Team or Mobile, you need to double-click the file.     2. From the window select __Current User__ > Next > __Place all certificates in the following store__ > Browse > __Trusted People__ > Next > Finish.     3. Double-click the .appx installer select __Install__.3. __Install the Extension - Chromium__     1. Open your Chromium browser of choice (Chrome, Brave, Opera, Vivaldi) and go to the extensions page, usualy at [chrome://extensions](chrome://extensions).     2. Open your file manager of choice, grab the .crx file with your mouse and drag it over to the extensions page of your browser. When prompted, select __Add extension__.     3. Only for Chrome, Vivaldi and Brave: Open your file manager, right-click the _ChromiumRegistryFix.reg_ file, click __Merge__ > Yes, then close and reopen all windows of your browser.     4. Only for Opera: There is a chance the extension will auto-install when downloaded. In that case, just follow the popup to the[Opera extensions](opera://extensions) page and click __Install__.     5. The first time you use the extension, it will ask if it can open the UWP app. You can click __Always allow__ to hide that popup. ⚠ The extension will not open the app without your knowledge.### 📤 How to use?1. __To share the current page you're on__     * Right-click on an empty space on the page and select __Share page via Sharemium__;     * Click the extension icon from the extensions list, and select __Share Page__ from the popup;2. __To share a hyperlink__     * Right-click on the link and select __Share link via Sharemium__;### ⚠ Important notes and known problems* Protocol parameters conflict     * Sharemium is made to work with the parameters <code>__title__, __descr__</code> and to ignore any other parameters.     * That means that websites whose content relies on URL parameters, as such YouTube (like <code>youtube.com/watch?v=dQw4w9WgXcQ</code>) are unserviceable by the app.     * I plan to find a fix for this with later revisions.* Browser Extensions     * Currently there is only an extension for Chromium browser, which is still in Beta and not production ready.     * I plan to release a Gecko add-on (Firefox, Floorp, Mullvad) later on.#### 📝 Notices* My first actual UWP C# app :)* For suggestions and bug feedback use the Issu4es in GitHub and set tag:     * Bug/Error     * New feature/design requests     * Appx Package Issue* Everyone is free to contribute to the project or use it as a reference for a personal one.* The app won't be published to the Microsoft Store, but the extensions might be uploaded on the Opera and Firefox Add-on stores.#### 🙏 Credits* [Empyreal96] for [Appx Re-Sign]  - used for appx package signing[Empyreal96]: <https://github.com/Empyreal96>[Appx Re-Sign]: <https://github.com/Empyreal96/Appx_Re-Sign>
