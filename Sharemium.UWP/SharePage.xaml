@@ -9,19 +9,24 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <ProgressBar x:Name="SharingProgress"
+                     IsIndeterminate="True"
+                     VerticalAlignment="Top"
+                     Height="8"
+                     Background="Transparent"/>
         <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            <Viewbox x:Name="SharingGraphicLoad" Width="40" HorizontalAlignment="Center" Visibility="Visible">
-                <ProgressRing IsActive="True"/>
-            </Viewbox>
-            <Image x:Name="SharingGraphicDone" Source="Assets/ShareDone.png" Width="64" Visibility="Collapsed"/>
-            <TextBlock x:Name="SharingTextLoad" FontSize="18" HorizontalAlignment="Center" Margin="5" Visibility="Visible">Redirecting...</TextBlock>
-            <TextBlock x:Name="SharingTextDone" FontSize="24" HorizontalAlignment="Center" Margin="5" Visibility="Collapsed">Share app selected!</TextBlock>
+            <TextBlock x:Name="SharingLoadText" FontSize="24" HorizontalAlignment="Center" Margin="5" Visibility="Visible">Redirecting...</TextBlock>
+            <StackPanel x:Name="SharingDonePanel" Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock FontSize="24" Margin="5" TextAlignment="Center">Share app selected!</TextBlock>
+                <TextBlock FontSize="16" Margin="5" TextAlignment="Center">The window will close after a bit...</TextBlock>
+            </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
             <Image Source="Assets/RawLogo.png" Width="40" Margin="5,0"/>
             <TextBlock FontSize="22" VerticalAlignment="Center">Sharemium</TextBlock>
         </StackPanel>
+        <TextBlock x:Name="DebugBox" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed"/>
     </Grid>
 </Page>

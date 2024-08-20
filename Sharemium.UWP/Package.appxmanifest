@@ -9,7 +9,7 @@
   <Identity
     Name="UnifyDev.SharingAssistant"
     Publisher="CN=UnifyDev"
-    Version="0.9.5.0" />
+    Version="9.8.5.0" />
 
   <mp:PhoneIdentity PhoneProductId="7a5a5142-388e-4ba7-8ad2-ab080acfd928" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

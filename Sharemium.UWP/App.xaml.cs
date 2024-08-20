@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -16,17 +17,18 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Collections;
+using Windows.System;
 
 namespace Sharemium
 {
     sealed partial class App : Application
     {
-        private readonly List<string> expectedParams = new List<string> { "title", "descr", "app" };
+        private readonly List<string> ParamWhitelist = new List<string> { "title", "descr", "app" };
 
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
         }
 
         protected override void OnActivated(IActivatedEventArgs args)
@@ -34,10 +36,15 @@ namespace Sharemium
             if (args.Kind == ActivationKind.Protocol)
             {
                 var protocolArgs = args as ProtocolActivatedEventArgs;
-                if (protocolArgs != null)
+                Uri uri = protocolArgs?.Uri;
+                if (uri != null && !string.IsNullOrEmpty(uri.AbsolutePath))
                 {
-                    HandleProtocolActivation(protocolArgs.Uri);
-                } else { LaunchMainPage(); }
+                    HandleProtocolActivation(uri);
+                }
+                else
+                {
+                    EmptyProtocolLaunch();
+                }
             }
             base.OnActivated(args);
         }
@@ -46,29 +53,25 @@ namespace Sharemium
         {
             if (uri == null || (string.IsNullOrEmpty(uri.AbsolutePath.Trim('/')) && string.IsNullOrEmpty(uri.Query)))
             {
-                LaunchMainPage();
+                EmptyProtocolLaunch();
                 return;
             }
-            var fullPath = uri.AbsolutePath.Trim('/');
-            var queryParams = new Dictionary<string, string>();
-            var queryString = uri.Query;
-            if (!string.IsNullOrEmpty(queryString))
+            string[] urlParts = uri.ToString().Split(new[] { '#' }, 2);
+            string baseUrlWithParams = urlParts[0];
+            Uri baseUri = new Uri(baseUrlWithParams);
+            string baseURL = $"{baseUri.Host}{baseUri.AbsolutePath}";
+
+            var QueryList = ExtractParameters(baseUri.Query);
+            Dictionary<string, string> appParams = new Dictionary<string, string>();
+            if (urlParts.Length > 1) // Only after '#'
             {
-                queryString = queryString.Substring(1); // Remove the leading '?'
-                var pairs = queryString.Split('&');
-                foreach (var pair in pairs)
-                {
-                    var keyValue = pair.Split('=');
-                    if (keyValue.Length == 2)
-                    {
-                        var key = Uri.UnescapeDataString(keyValue[0]);
-                        var value = Uri.UnescapeDataString(keyValue[1]);
-                        if (expectedParams.Contains(key))
-                        {
-                            queryParams[key] = value;
-                        }
-                    }
-                }
+                appParams = ExtractParameters(urlParts[1], ParamWhitelist);
+            }
+
+            var fullPath = baseURL;
+            if (QueryList.Count > 0)
+            {
+                fullPath += "?" + string.Join("&", QueryList.Select(p => $"{p.Key}={Uri.EscapeDataString(p.Value)}"));
             }
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
@@ -76,40 +79,48 @@ namespace Sharemium
                 rootFrame = new Frame();
                 Window.Current.Content = rootFrame;
             }
-            rootFrame.Navigate(typeof(SharePage), new ProtocolHandlerParameters(fullPath, queryParams));
+            rootFrame.Navigate(typeof(SharePage), new ProtocolHandlerParameters(fullPath, appParams));
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(420, 420));
+            ApplicationView.PreferredLaunchViewSize = new Size(420, 620);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             Window.Current.Activate();
         }
-
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            LaunchMainPage();
+            EmptyProtocolLaunch();
         }
-
-        private void LaunchMainPage()
+        private async void EmptyProtocolLaunch()
         {
-            Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US";
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame == null)
-            {
-                rootFrame = new Frame();
-                rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
-                rootFrame.NavigationFailed += OnNavigationFailed;
-                Window.Current.Content = rootFrame;
-                
-            }
-            rootFrame.Navigate(typeof(MainPage));
-            Window.Current.Activate();
+            await Launcher.LaunchUriAsync(new Uri(@"https://borisg912.github.io/Sharemium"));
+            Exit();
         }
-
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
-
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private Dictionary<string, string> ExtractParameters(string query, List<string> whitelist = null)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            deferral.Complete();
+            var parameters = new Dictionary<string, string>();
+            if (string.IsNullOrWhiteSpace(query)) return parameters;
+            if (query.StartsWith("?"))
+            {
+                query = query.Substring(1); // Question mark '?'
+            }
+            var pairs = query.Split('&');
+            foreach (var pair in pairs)
+            {
+                var keyValue = pair.Split('=');
+                if (keyValue.Length == 2)
+                {
+                    var key = Uri.UnescapeDataString(keyValue[0]);
+                    var value = Uri.UnescapeDataString(keyValue[1]);
+                    if (whitelist == null || whitelist.Contains(key))
+                    {
+                        parameters[key] = value;
+                    }
+                }
+            }
+            return parameters;
         }
     }
     public class ProtocolHandlerParameters

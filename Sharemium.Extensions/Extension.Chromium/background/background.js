@@ -1,56 +1,63 @@
-console.log('Sharemium Console - Background proccess activated!');
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.contextMenus.create({ // Create 'hyperlink' context menu Share entry
-    id: "HyperlinkContextMenuEntry",
-    title: "Send link via Sharemium",
-    contexts: ["link"]
+chrome.runtime.onInstalled.addListener(function () {
+  const UAresult = new UAParser().getResult();
+  const browserName = UAresult.browser.name;
+  chrome.storage.local.set({ thisBrowserName: browserName });
+  chrome.contextMenus.removeAll(function () {
+    chrome.contextMenus.create({
+      id: 'RootPageContextEntry',
+      title: 'Share this page',
+      contexts: ['page']
+    });
+    chrome.contextMenus.create({
+      id: 'HyperlinkContextEntry',
+      title: 'Share this link',
+      contexts: ['link']
+    });
   });
-  chrome.contextMenus.create({ // Create 'tab page' context menu Share entry
-    id: "PageContextMenuEntry",
-    title: "Share page via Sharemium",
-    contexts: ["page"] 
+});
+
+function ShareCurrentTab() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { action: "getCurrentMetadata" }, function (response) {
+      if (chrome.runtime.lastError) {
+        console.error("Sharemium - background - Metadata recieve error: " + chrome.runtime.lastError.message);
+        return;
+      }
+
+      if (response) {
+        chrome.storage.local.get("thisBrowserName", function (result) {
+          var browserName = result.thisBrowserName;
+          var currentURL = response.tabURL;
+          var currentTitle = response.tabTitle;
+          var currentDescr = response.tabDescr;
+
+          let AppLaunchURI = 'sharemium:' + currentURL + '#title=' + currentTitle + '&descr=' +currentDescr + '&app=' + browserName;
+          chrome.tabs.update(tabs[0].id, { url: AppLaunchURI });
+        });
+      }
+    });
   });
-});
-
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  if (message.action === "ShareCurrentPage") {
-    // Call the function you want to execute
-    ShareCurrentTabPage();
-    sendResponse({ status: "Shared successfully!" });
-  }
-});
-
-let shareTitle; // Global variable Page/Link Title tag 
-let shareDescr; // Global variable Page/Link description meta tag
-let shareURL; // Global variable Page/Link URL path
-
-chrome.contextMenus.onClicked.addListener(function(info) {
-  if (info.menuItemId === "HyperlinkContextMenuEntry") {
-    shareURL = info.linkUrl; // Hyperlink URL
-    LaunchSharemiumProccess();
-  }
-  if (info.menuItemId === "PageContextMenuEntry") {
-    ShareCurrentTabPage();
-  }
-});
-
-function ShareCurrentTabPage(window) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) { // Query of active tabs on current window (first = the one opened)
-    var activeTab = tabs[0];
-    if (activeTab) {
-      shareTitle = activeTab.title; // Tab page Title
-      shareURL = activeTab.url; // Tab page URL
-      LaunchSharemiumProccess();
-    }});
 }
 
-function LaunchSharemiumProccess() {
-  var SharemiumURI = "sharemium:" + shareURL; // Main end protocol schema
-  var protocolTitle = "?title=" + shareTitle; // Title tag end protocol entry
-  var protocolDescr = "&descr=" + shareDescr; // Description tag end protocol entry
+function ShareSelectedHyperlink(info) {
+  chrome.storage.local.get("thisBrowserName", function (result) {
+    var browserName = result.thisBrowserName;
 
-  if (shareTitle !== null && shareTitle !== undefined) { SharemiumURI += protocolTitle; } // If Title is null, leave parameter off the end URI output
-  if (shareDescr !== null && shareDescr !== undefined) { SharemiumURI += protocolDescr; } // If Descr is null, leave parameter off the end URI output
-  chrome.tabs.update({ url: SharemiumURI });
-};
+    let AppLaunchURI = 'sharemium:' + info.linkUrl + '#app=' + browserName;
+    chrome.tabs.update({ url: AppLaunchURI });
+  });
+}
 
+chrome.contextMenus.onClicked.addListener(function (info, tab) {
+  if (info.menuItemId === "RootPageContextEntry") {
+    ShareCurrentTab();
+  } else if (info.menuItemId === "HyperlinkContextEntry") {
+    ShareSelectedHyperlink(info);
+  }
+});
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.action === "RootPageBrowserActionEntry") {
+    ShareCurrentTab();
+  }
+});
