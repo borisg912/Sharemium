@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sharemium</title>
+        <title>Sharemium: A Windows UWP sharing assistant</title>
+        <meta name="description" content="The perfect extension-program duo for sharing content from your browser to your favorite UWP apps with ease">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <link rel="shortcut icon" href="./Assets/FaviconLogo.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+        <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <p>Hello world!</p>
+        <hero>
+            <img id="hero-main-bigLogo" src="./Assets/RawLogo.png" alt="Sharemium Big Logo">
+            <p id="hero-main-title">Sharemium</p>
+            <p id="hero-main-subtitle">The perfect extension-program duo for sharing content from your browser to your favorite UWP apps with ease</p>
+            <button id="hero-sub-scrolldown" type="button" onclick="PageHero_ScrollDown()"><i class='bx bx-chevron-down bx-fade-up'></i></button>
+        </hero>
+        <pageContent>
+        </pageContent>
+        <footer>
+            <div id="footer-siteMap">
+                <a class="footer-siteLink" href="https://github.com/borisg912/Sharemium"><i class='bx bxl-github'></i>Repo</a>
+                <a class="footer-siteLink" href="/Sharemium/Demo">Demo Playground</a>
+            </div>
+            <div id="footer-socialLinks">
+                <a class="footer-socialEntry" href="https://github.com/borisg912"><i class='bx bxl-github'></i></a>
+                <a class="footer-socialEntry" href="https://instagram.com/@bg0169gg"><i class='bx bxl-instagram'></i></a>
+                <a class="footer-socialEntry" href="https://instagram.com/@bg0169gg"><i class='bx bxl-instagram'></i></a>
+                <a class="footer-socialEntry" href="https://instagram.com/@bg0169gg"><i class='bx bxl-instagram'></i></a>
+            </div>
+            <a id="footer-copyright" href="https://choosealicense.com/licenses/gpl-3.0/" title="GNU General Public License v3.0">©2024 UnifyDev</a>
+        </footer>
     </body>
 </html>

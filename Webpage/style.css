@@ -1,0 +1,103 @@
+:root {
+    color-scheme: light dark;
+
+    --platformPalette-light-background: #fefefe;
+    --platformPalette-light-foreground: #1a1a1a;
+
+    --platformPalette-dark-background: #131313;
+    --platformPalette-dark-foreground: #eaeaea;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', sans-serif;
+}
+
+hero {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -ms-flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 98vh;
+    min-height: 350px;
+    border-radius: 0 0 48px 48px;
+    -webkit-border-radius: 0 0 48px 48px;
+}
+#hero-main-bigLogo {
+    image-rendering: optimizeQuality;
+    height: 45vh;
+    min-height: 150px;
+    width: 45vh;
+    min-width: 150px;
+}
+#hero-main-title {
+    font-size: 8vw;
+    text-align: center;
+}
+#hero-main-subtitle {
+    font-size: 1.2rem;
+    text-align: center;
+    width: 75%;
+}
+#hero-sub-scrolldown {
+    width: 2rem;
+    height: 2rem;
+    margin: 15px 0 0 0;
+    padding: 5px;
+    border: none;
+    border-radius: 24px;
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: var(--platformPalette-light-background);
+    }
+    hero {
+        background: linear-gradient(180deg, #5da1ff, #228be3);
+        background-size: 400% 400%;
+        -webkit-animation: HeroMainBackGradient 10s ease infinite;
+        -moz-animation: HeroMainBackGradient 10s ease infinite;
+        -o-animation: HeroMainBackGradient 10s ease infinite;
+        animation: HeroMainBackGradient 10s ease infinite;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--platformPalette-dark-background);
+    }
+    hero {
+        background: linear-gradient(180deg, #22a2ff, #0074d4);
+        background-size: 400% 400%;
+        -webkit-animation: HeroMainBackGradient 10s ease infinite;
+        -moz-animation: HeroMainBackGradient 10s ease infinite;
+        -o-animation: HeroMainBackGradient 10s ease infinite;
+        animation: HeroMainBackGradient 10s ease infinite;
+    }
+}
+
+@-webkit-keyframes HeroMainBackGradient {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@-moz-keyframes HeroMainBackGradient {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@-o-keyframes HeroMainBackGradient {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@keyframes HeroMainBackGradient {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}

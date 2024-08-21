@@ -1,10 +1,114 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Test website sharing - Sharemium</title>
+        <title>Demo playground - Sharemium</title>
+        <meta name="description" content="A demo playground to test and interact with the Sharemium browser extension.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=7">
+        <link rel="shortcut icon" href="../Assets/FaviconLogo.png" type="image/x-icon">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', sans-serif;
+            }
+            body {
+                background-color: #fefefe;
+            }
+            header {
+                display: flex;
+                display: -webkit-flex;
+                flex-direction: row;
+                -ms-flex-direction: row;
+                flex-wrap: nowrap;
+                -ms-flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                background: fixed #eeeeee;
+                border-radius: 16px;
+                width: fit-content;
+                margin: 8px auto;
+                padding: 4px;
+            }
+            #header-logo {
+                width: 15vh;
+                min-width: 48px;
+            }
+            #header-title {
+                font-size: 2rem;
+                font-weight: 400;
+                margin: 0 6px;
+                text-align: center;
+            }
+            core {
+                display: flex;
+                display: -webkit-flex;
+                flex-direction: row;
+                -ms-flex-direction: row;
+                flex-wrap: wrap;
+                -ms-flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                width: 75vw;
+                max-width: 750px;
+                height: 50vh;
+                min-height: 200px;
+                margin: auto;
+                background: fixed #696969;
+                padding: 8px;
+                border-radius: 14px;
+            }
+            #core-Test-text {
+                font-size: 21px;
+                width: 45%;
+                height: 90%;
+                background: fixed #eeeeee;
+                border-radius: 10px;
+                padding: 4px;
+            }
+            subcore {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: fit-content;
+                width: 45%;
+                height: 90%;
+                background: fixed #eeeeee;
+                border-radius: 10px;
+                padding: 4px;
+            }
+            #subcore-Test-text {
+                width: fit-content;
+                font-size: 19px;
+                margin: 4px;
+            }
+            #subcore-Test-hyper {
+                font-size: 17px;
+                margin: 5% 0;
+                text-decoration: none;
+                color: #33aaff;
+            }
+            #subcore-Test-hyper:hover {
+                text-decoration: underline #33aaff 1px;
+                color: #2678b3;
+            }
+        </style>
     </head>
     <body>
-        <p>Sharemium Demo playground</p>
-        <p>Right-click anywhere on this page to </p>
+        <header>
+            <img id="header-logo" src="../Assets/RawLogo.png" alt="Sharemium Logo">
+            <p id="header-title">Demo playground</p>
+        </header>
+        <core>
+            <p id="core-Test-text">Right-click on any space in this page to tackle with the page sharing feature.</p>
+            <subcore>
+                <p id="subcore-Test-text">Right-click on this link to try out the link sharing feature.</p>
+                <a id="subcore-Test-hyper" href="https://example.com/" title="An Example Page">Example Page</a>
+            </subcore>
+        </core>
     </body>
 </html>
