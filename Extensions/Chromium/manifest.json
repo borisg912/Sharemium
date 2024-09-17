@@ -2,10 +2,10 @@
   "name": "Sharemium",
   "short_name": "Sharemium",
   "author": "UnifyDev",
-  "version": "9.8",
-  "version_name": "Beta 5",
+  "version": "9.9",
+  "version_name": "Build 2",
   "manifest_version": 2,
-  "description": "A browser extension for the UWP Windows app Sharemium",
+  "description": "A browser extension for the UWP Sharemium client",
   "permissions": [
     "<all_urls>",
     "activeTab",

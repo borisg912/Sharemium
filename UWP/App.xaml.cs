@@ -80,9 +80,6 @@ namespace Sharemium
                 Window.Current.Content = rootFrame;
             }
             rootFrame.Navigate(typeof(SharePage), new ProtocolHandlerParameters(fullPath, appParams));
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(420, 420));
-            ApplicationView.PreferredLaunchViewSize = new Size(420, 620);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             Window.Current.Activate();
         }
         protected override void OnLaunched(LaunchActivatedEventArgs e)

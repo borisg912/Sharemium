@@ -6,21 +6,18 @@
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   IgnorableNamespaces="uap mp">
 
-  <Identity
-    Name="UnifyDev.SharingAssistant"
-    Publisher="CN=UnifyDev"
-    Version="9.8.5.0" />
+  <Identity Name="UnifyDev.SharingAssistant" Publisher="CN=UnifyDev" Version="9.9.2.0"/>
 
   <mp:PhoneIdentity PhoneProductId="7a5a5142-388e-4ba7-8ad2-ab080acfd928" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Sharemium</DisplayName>
     <PublisherDisplayName>UnifyDev</PublisherDisplayName>
-	<Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0"/>
   </Dependencies>
 
   <Resources>
@@ -28,24 +25,16 @@
   </Resources>
 
   <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="Sharemium.Core">
-		<uap:VisualElements
-			DisplayName="Sharemium"
-            Description="Windows sharing assistant"
-			Square150x150Logo="Assets\150x150Logo.png"
-            Square44x44Logo="Assets\AppLogo.png"
-			BackgroundColor="transparent"
-			AppListEntry="none">
-			<uap:SplashScreen Image="Assets\SplashLogo.png" BackgroundColor="transparent"/>
-			<uap:DefaultTile
-				Square71x71Logo="Assets\71x71Logo.png">
-				<uap:ShowNameOnTiles>
-					<uap:ShowOn
-					  Tile="square150x150Logo"/>
-				</uap:ShowNameOnTiles>
-			</uap:DefaultTile>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Sharemium.App">
+		<uap:VisualElements DisplayName="Sharemium"
+                        Description="Windows sharing assistant"
+                        Square150x150Logo="Assets\150x150Logo.png"
+                        Square44x44Logo="Assets\AppLogo.png"
+                        BackgroundColor="transparent"
+                        AppListEntry="none">
+			<uap:SplashScreen Image="Assets\SplashLogo.png"
+                        BackgroundColor="transparent"/>
+			<uap:DefaultTile Square71x71Logo="Assets\71x71Logo.png"/>
 		</uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.protocol">

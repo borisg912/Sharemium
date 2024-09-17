@@ -25,6 +25,7 @@ namespace Sharemium
     {
         // Values for ShareDialogUI
         private string ShareContent;
+        private string ShareContentType;
         private string ShareTitle;
         private bool ShareTitleExists;
         private string ShareDescr;
@@ -39,8 +40,7 @@ namespace Sharemium
         public SharePage()
         {
             this.InitializeComponent();
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(480, 120));
-            ApplicationView.PreferredLaunchViewSize = new Size(480, 120);
+            ApplicationView.PreferredLaunchViewSize = new Size(180, 640);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
@@ -61,11 +61,19 @@ namespace Sharemium
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            if (_timer.IsEnabled == true)
+            {
+                _timer.Stop();
+            }
             if (e.Parameter is ProtocolHandlerParameters parameters)
             {
                 HandleURIParameters(parameters.FullPath, parameters.QueryParams);
                 await Task.Delay(150);
                 DataTransferManager.ShowShareUI();
+            }
+            else
+            {
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => CoreApplication.Exit());
             }
         }
 
@@ -90,6 +98,9 @@ namespace Sharemium
                         break;
                     case "descr":
                         ShareDescr = param.Value;
+                        break;
+                    case "typeof":
+                        ShareContentType = param.Value;
                         break;
                     case "app":
                         ShareHostApp = param.Value;

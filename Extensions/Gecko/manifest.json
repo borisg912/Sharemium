@@ -1,0 +1,36 @@
+{
+    "name": "Sharemium",
+    "short_name": "Sharemium",
+    "author": "UnifyDev",
+    "version": "9.9",
+    "version_name": "Build 2",
+    "manifest_version": 2,
+    "description": "A browser extension for the UWP Sharemium client",
+    "permissions": [
+      "<all_urls>",
+      "activeTab",
+      "tabs",
+      "webNavigation",
+      "storage",
+      "contextMenus"
+    ],
+    "icons": {
+      "16": "Assets/Logo16x16.png",
+      "24": "Assets/Logo24x24.png",
+      "32": "Assets/Logo32x32.png",
+      "48": "Assets/Logo48x48.png",
+      "64": "Assets/Logo64x64.png",
+      "128": "Assets/Logo128x128.png"
+    },
+    "background": {
+      "page": "background/index.html",
+      "persistent": false
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["background/page-background.js"],
+        "run_at": "document_idle"
+      }
+    ]
+  }

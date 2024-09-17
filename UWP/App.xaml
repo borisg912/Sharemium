@@ -14,11 +14,6 @@
                                   TintOpacity="0.5"
                                   TintLuminosityOpacity="0.45"
                                   FallbackColor="#fefefe"/>
-                    <AcrylicBrush x:Key="FlipViewItemBackgroundThemeBrush"
-                                  BackgroundSource="Backdrop"
-                                  TintColor="#eaeaea"
-                                  TintOpacity="0.75"
-                                  FallbackColor="#eaeaea"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <AcrylicBrush x:Key="ApplicationPageBackgroundThemeBrush"
@@ -27,11 +22,6 @@
                                   TintOpacity="0.5"
                                   TintLuminosityOpacity="0.45"
                                   FallbackColor="#131313"/>
-                    <AcrylicBrush x:Key="FlipViewItemBackgroundThemeBrush"
-                                  BackgroundSource="Backdrop"
-                                  TintColor="#2a2a2a"
-                                  TintOpacity="0.75"
-                                  FallbackColor="#2a2a2a"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
